@@ -1,0 +1,46 @@
+<nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="{{ url_for('index') }}">
+            <img src="{{ url_for('static', filename='img/headerlogo.png') }}" width="112" height="28">
+        </a>
+
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+           data-target="navbar">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+
+    <div id='navbar' class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item" href="{{ url_for('index') }}">Home</a>
+            {% if current_user.username and current_user.role == 'admin' %}
+                <a class="navbar-item">SQL Runner</a>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">Manage</a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item">Users</a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="navbar-end">
+            <div class="navbar-item">
+                {% if current_user.username %}
+                    <div class="buttons">
+                        <a class="button is-light" href="{{ url_for('auth.logout') }}">Log out</a>
+                    </div>
+                {% else %}
+                    <div class="buttons">
+                        <a class="button is-primary" href="{{ url_for('auth.register') }}">
+                            <strong>Register</strong>
+                        </a>
+                        <a class="button is-light" href="{{ url_for('auth.login') }}">Log in</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</nav>

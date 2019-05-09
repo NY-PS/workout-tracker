@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{{ title or "Exercise Tracker" }}</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bulma/bulma.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+{% include "partials/navbar.html" %}
+<section class="hero is-light is-fullheight-with-navbar">
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+    {% include "partials/footer.html" %}
+</section>
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/vue-js/vue.js') }}"></script>
+    <script src="{{ url_for("static", filename='js/main.js') }}"></script>
+{% endblock %}
+</body>
+</html>

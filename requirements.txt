@@ -1,0 +1,8 @@
+records
+flask==1.0.2
+PyYAML
+flask-login
+flask-wtf
+wtforms
+flask-bcrypt
+psycopg2

@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="notification
+                               {% if message[0] == 'danger' %}
+                               is-danger
+                               {% elif message[0] == 'success' %}
+                               is-success
+                               {% else %}
+                               is-info
+                               {% endif %}
+                               ">
+                    {{ message[1] }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <div class="column is-4 is-offset-4">
+        <h3 class="title has-text-grey">Register</h3>
+        <p class="subtitle has-text-grey">Please complete the sign up process.</p>
+        <div class="box">
+            <form method="post" action="{{ url_for('auth.register', next=request.args.get('next')) }}">
+                {{ form.hidden_tag() }}
+
+                <div class="field">
+                    <div class="control">
+                        {{ form.username.label() }}
+                        {% if form.username.errors %}
+                            {{ form.username(class="input is-large is-danger") }}
+                            {% for error in form.username.errors %}
+                                <span class="has-text-danger">{{ error }}</span>
+                            {% endfor %}
+                        {% else %}
+                            {{ form.username(class="input is-large", placeholder='Your Username') }}
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="control">
+                        {{ form.email.label() }}
+                        {% if form.email.errors %}
+                            {{ form.email(class="input is-large is-danger") }}
+                            {% for error in form.email.errors %}
+                                <span class="has-text-danger">{{ error }}</span>
+                            {% endfor %}
+                        {% else %}
+                            {{ form.email(class="input is-large", placeholder='Your Email') }}
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="control">
+                        {{ form.password.label() }}
+                        {% if form.password.errors %}
+                            {{ form.password(class="input is-large is-danger") }}
+                            {% for error in form.password.errors %}
+                                <span class="has-text-danger">{{ error }}</span>
+                            {% endfor %}
+                        {% else %}
+                            {{ form.password(class="input is-large", placeholder='Your Password') }}
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="control">
+                        {{ form.confirm_password.label() }}
+                        {% if form.confirm_password.errors %}
+                            {{ form.confirm_password(class="input is-large is-danger") }}
+                            {% for error in form.confirm_password.errors %}
+                                <span class="has-text-danger">{{ error }}</span>
+                            {% endfor %}
+                        {% else %}
+                            {{ form.confirm_password(class="input is-large", placeholder='Confirm Password') }}
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="field">
+                    {{ form.submit(class='button is-block is-info is-large is-fullwidth') }}
+                </div>
+            </form>
+        </div>
+        <p class="has-text-grey">
+            <a href="{{ url_for('auth.register') }}">Register</a> &nbsp;·&nbsp;
+            <a href="{{ url_for('index') }}">Forgot Password</a>
+        </p>
+    </div>
+{% endblock %}

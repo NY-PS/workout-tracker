@@ -14,6 +14,23 @@
 <section class="hero is-light is-fullheight-with-navbar">
     <div class="hero-body">
         <div class="container has-text-centered">
+            {% with messages = get_flashed_messages(with_categories=True) %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="notification
+                               {% if message[0] == 'danger' %}
+                               is-danger
+                               {% elif message[0] == 'success' %}
+                               is-success
+                               {% else %}
+                               is-info
+                               {% endif %}
+                               ">
+                            {{ message[1] }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
             {% block content %}{% endblock %}
         </div>
     </div>

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, SelectField
+from wtforms import StringField, SubmitField, SelectField, PasswordField
 from wtforms.validators import (
     DataRequired, Length, Email
 )
@@ -25,6 +25,7 @@ class UserForm(FlaskForm):
     username = StringField(
         'Username', validators=[DataRequired(), Length(min=3, max=16)]
     )
+    password = PasswordField('Password', validators=[DataRequired()])
     fname = StringField('First Name', validators=[])
     lname = StringField('Last Name', validators=[])
     email = StringField('Email Address', validators=[Email()])
@@ -34,4 +35,4 @@ class UserForm(FlaskForm):
     )
     city = StringField('City')
     state = StringField('State')
-    submit = SubmitField('Sign Up')
+    submit = SubmitField('Submit')

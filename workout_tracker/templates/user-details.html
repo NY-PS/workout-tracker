@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <nav class="breadcrumb">
+        <ul>
+            <li>
+                <a href="{{ url_for('admin.users') }}">Users</a>
+            </li>
+            <li class="is-active">
+                <a href="{{ url_for('admin.user_details', user_id=user_id) }}">{{ user_id }}</a>
+            </li>
+        </ul>
+    </nav>
+    {% if user is not none %}
+        <div class="card">
+            <header class="card-header">
+                <p class="card-header-title">User Details</p>
+            </header>
+            <div class="card-content">
+                <div class="content">
+                    <p><strong>user_name:</strong> {{ user.user_name or "" }}</p>
+                    <p><strong>fname:</strong> {{ user.fname or "" }}</p>
+                    <p><strong>lname:</strong> {{ user.lname or "" }}</p>
+                    <p><strong>email:</strong> {{ user.email or "" }}</p>
+                    <p><strong>user_role:</strong> {{ user.user_role or "" }}</p>
+                    <p><strong>city:</strong> {{ user.city or "" }}</p>
+                    <p><strong>state:</strong> {{ user.state or "" }}</p>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

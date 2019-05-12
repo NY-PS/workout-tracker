@@ -1,23 +1,7 @@
+{# Adapted from https://dansup.github.io/bulma-templates/templates/login.html #}
 {% extends "base.html" %}
 
 {% block content %}
-    {% with messages = get_flashed_messages(with_categories=True) %}
-        {% if messages %}
-            {% for message in messages %}
-                <div class="notification
-                               {% if message[0] == 'danger' %}
-                               is-danger
-                               {% elif message[0] == 'success' %}
-                               is-success
-                               {% else %}
-                               is-info
-                               {% endif %}
-                               ">
-                    {{ message[1] }}
-                </div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
     <div class="column is-4 is-offset-4">
         <h3 class="title has-text-grey">Register</h3>
         <p class="subtitle has-text-grey">Please complete the sign up process.</p>

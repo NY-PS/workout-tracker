@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="columns">
+        <div class="column">
+            <h3 class="is-size-4 heading">Create User</h3>
+            <div class="box">
+                <form method="post" action="{{ url_for('admin.users') }}">
+                    {{ form.hidden_tag() }}
+                    <div class="field">
+                        <div class="control">
+                            {{ form.username.label() }}
+                            {% if form.username.errors %}
+                                {{ form.username(class="input is-danger") }}
+                                {% for error in form.username.errors %}
+                                    <span class="has-text-danger">{{ error }}</span>
+                                {% endfor %}
+                            {% else %}
+                                {{ form.username(class="input", placeholder='Username') }}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            {{ form.password.label() }}
+                            {% if form.password.errors %}
+                                {{ form.password(class="input is-danger") }}
+                                {% for error in form.password.errors %}
+                                    <span class="has-text-danger">{{ error }}</span>
+                                {% endfor %}
+                            {% else %}
+                                {{ form.password(class="input", placeholder='Password') }}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            {{ form.fname.label() }}
+                            {% if form.fname.errors %}
+                                {{ form.fname(class="input is-danger") }}
+                                {% for error in form.fname.errors %}
+                                    <span class="has-text-danger">{{ error }}</span>
+                                {% endfor %}
+                            {% else %}
+                                {{ form.fname(class="input", placeholder='First Name') }}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            {{ form.lname.label() }}
+                            {% if form.lname.errors %}
+                                {{ form.lname(class="input is-danger") }}
+                                {% for error in form.lname.errors %}
+                                    <span class="has-text-danger">{{ error }}</span>
+                                {% endfor %}
+                            {% else %}
+                                {{ form.lname(class="input", placeholder='Last Name') }}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            {{ form.email.label() }}
+                            {% if form.email.errors %}
+                                {{ form.email(class="input is-danger") }}
+                                {% for error in form.email.errors %}
+                                    <span class="has-text-danger">{{ error }}</span>
+                                {% endfor %}
+                            {% else %}
+                                {{ form.email(class="input", placeholder='Email') }}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            {{ form.user_role.label() }}
+                            {% if form.user_role.errors %}
+                                <div class="select is-danger">
+                                    {{ form.user_role() }}
+                                </div>
+                                {% for error in form.user_role.errors %}
+                                    <span class="has-text-danger">{{ error }}</span>
+                                {% endfor %}
+                            {% else %}
+                                <div class="select">
+                                    {{ form.user_role() }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            {{ form.city.label() }}
+                            {% if form.city.errors %}
+                                {{ form.city(class="input is-danger") }}
+                                {% for error in form.city.errors %}
+                                    <span class="has-text-danger">{{ error }}</span>
+                                {% endfor %}
+                            {% else %}
+                                {{ form.city(class="input", placeholder='City') }}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            {{ form.state.label() }}
+                            {% if form.state.errors %}
+                                {{ form.state(class="input is-danger") }}
+                                {% for error in form.state.errors %}
+                                    <span class="has-text-danger">{{ error }}</span>
+                                {% endfor %}
+                            {% else %}
+                                {{ form.state(class="input", placeholder='State') }}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        {{ form.submit(class='button is-block is-info is-fullwidth') }}
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <div class="column">
+            <h3 class="is-size-4 heading">List of Users</h3>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>user_name</th>
+                    <th>fname</th>
+                    <th>lname</th>
+                    <th>email</th>
+                    <th>user_role</th>
+                    <th>city</th>
+                    <th>state</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>
+                            <a class="has-text-link"
+                               href="{{ url_for('admin.user_details', user_id=user.id) }}">
+                                {{ user.user_name or "" }}
+                            </a>
+                        </td>
+                        <td>{{ user.fname or "" }}</td>
+                        <td>{{ user.lname or "" }}</td>
+                        <td>{{ user.email or "" }}</td>
+                        <td>{{ user.user_role or "" }}</td>
+                        <td>{{ user.city or "" }}</td>
+                        <td>{{ user.state or "" }}</td>
+                        <td>
+                            <button class="button is-primary is-small">Edit</button>
+                        </td>
+                        <td>
+                            <button class="button is-danger is-small">Delete</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

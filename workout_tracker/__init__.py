@@ -33,7 +33,8 @@ def create_app():
         return render_template('index.html')
 
     # apply the app blueprints
-    from workout_tracker.views import auth
+    from workout_tracker.views import auth, admin
     app.register_blueprint(auth.bp)
+    app.register_blueprint(admin.bp)
 
     return app
